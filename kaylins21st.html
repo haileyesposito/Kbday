@@ -36,60 +36,45 @@
       text-align: center;
       margin: 0 0 2em 0;
     }
-    .heart-btn {
+    .beer-btn {
       position: relative;
-      width: 100px;
-      height: 90px;
-      background: transparent;
+      background: none;
       border: none;
+      font-size: 5em; /* makes the beer emoji big */
       cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
       outline: none;
+      padding: 0.3em 0.5em;
+      transition: transform 0.1s;
     }
-    
-    .heart-btn::before,
-    .heart-btn::after {
-      content: "";
+    .beer-btn:hover {
+      transform: scale(1.1);
+    }
+    .beer-btn span {
       position: absolute;
-      left: 50px;
-      top: 0;
-      width: 50px;
-      height: 80px;
-      background: #ff69b4;
-      border-radius: 50px 50px 0 0;
-      transform: translateX(-50%);
-    }
-    
-    .heart-btn::before {
-      left: 0;
-      transform: rotate(-45deg);
-      transform-origin: 100% 100%;
-    }
-    
-    .heart-btn::after {
-      left: 50px;
-      transform: rotate(45deg);
-      transform-origin: 0 100%;
-    }
-    
-    .heart-btn span {
-      position: absolute;
-      width: 100%;
-      top: 60px;
-      left: 0;
-      text-align: center;
-      color: white;
+      left: 50%;
+      top: 60%;
+      transform: translate(-50%, -50%);
+      font-size: 1em;
+      color: #fff;
+      background: rgba(0,0,0,0.5);
+      padding: 0.2em 0.8em;
+      border-radius: 12px;
       font-family: 'Quicksand', sans-serif;
       font-weight: bold;
-      font-size: 1.2em;
-      text-shadow: 2px 2px 8px #000;
       pointer-events: none;
+      white-space: nowrap;
+      text-shadow: 1px 1px 2px #000;
     }
   </style>
 </head>
 <body>
   <h1>Happy Birthday Kaylin!!!</h1>
-  <button class="heart-btn" onclick="window.location.href='celebrate.html'">
-    <span>🍻YAY🍻</span>
+  <button class="beer-btn" onclick="window.location.href='celebrate.html'">
+  🍺
+    <span>click to celebrate</span>
   </button>
 </body>
 </html>
