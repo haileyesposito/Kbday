@@ -55,7 +55,73 @@
 <body>
   <canvas id="confetti-canvas"></canvas>
   <h1>Happy Birthday Kaylin</h1>
-  <button onclick="window.location.href='celebrate.html'">🍺</button>
+  <button id="beer-btn">🍺</button>
+  <div id="trivia-container" style="display:none; z-index:2; background:#222; color:#fff; padding:2em; border-radius:1em; box-shadow:0 0 20px #000a; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); max-width:90vw;">
+    <h2>Birthday Trivia!</h2>
+    <div id="question"></div>
+    <div id="answers"></div>
+    <div id="result" style="margin-top:1em;"></div>
+  </div>
+  <script>
+  const trivia = [
+    {
+      question: "What's Kaylin's favorite drink?",
+      answers: ["Celcius", "Shaken Espresso", "Beer", "Peach Juice"],
+      correct:3
+    },
+    {
+      question: "Who is Kaylin's favorite person",
+      answers: ["His hot gf", "Chris Evans", "Matt Bomer", "RuPaul"],
+      correct: 1
+    },
+    {
+      question: "How many shots is Kaylin having today?",
+      answers: ["0", "1", "5", "∞"],
+      correct: 4
+    }
+  ];
+  
+  let current = 0;
+  
+  function showTrivia() {
+    document.getElementById('trivia-container').style.display = 'block';
+    showQuestion();
+  }
+  
+  function showQuestion() {
+    const q = trivia[current];
+    document.getElementById('question').innerText = q.question;
+    const answersDiv = document.getElementById('answers');
+    answersDiv.innerHTML = '';
+    q.answers.forEach((ans, idx) => {
+      const btn = document.createElement('button');
+      btn.innerText = ans;
+      btn.style.margin = '0.5em';
+      btn.onclick = () => checkAnswer(idx);
+      answersDiv.appendChild(btn);
+    });
+    document.getElementById('result').innerText = '';
+  }
+  
+  function checkAnswer(selected) {
+    const q = trivia[current];
+    if(selected === q.correct){
+      document.getElementById('result').innerText = "Slay! 🎉";
+      current++;
+      if(current < trivia.length){
+        setTimeout(showQuestion, 1200);
+      } else {
+        setTimeout(() => {
+          document.getElementById('result').innerText = "Yay you are done! 🥳";
+        }, 1200);
+      }
+    } else {
+      document.getElementById('result').innerText = "BOOOO WRONG🤣🫵!";
+    }
+  }
+  
+  document.getElementById('beer-btn').onclick = showTrivia;
+  </script>
   <script>
     // Basic confetti animation (no libraries)
     const canvas = document.getElementById('confetti-canvas');
