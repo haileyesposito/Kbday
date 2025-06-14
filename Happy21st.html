@@ -149,6 +149,9 @@
       } else {
         setTimeout(() => {
           document.getElementById('result').innerText = "Yay you are done! 🥳";
+          setTimeout(() => {
+              window.location.href = "celebrate.html";
+          }, 2000);
         }, 1200);
       }
     } else {
