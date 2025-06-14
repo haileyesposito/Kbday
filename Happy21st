@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset = "UTF-8">
-  <meta name="viewport" content="width=device-width,
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
   <title>Happy Birthday Kaylin!!</title>
   <style>
-    html,body {
+    html, body {
       height: 100%;
       margin: 0;
       padding: 0;
@@ -13,47 +13,126 @@
     }
     body {
       height: 100vh;
-      display: felx;
+      background: #000;
+      display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      animation: ranbow 2s linear infinite; 
-    }
-     @keyframes rainbow {
-      0% {background: #ff0000;}
-      16%{background: #ff9900;}
-      33%{background: #ffff00;}
-      50%{background: #00ff00;}
-      66%{background: #00ffff;}
-      83%{background: #0000ff;}
-      100%{background: #ff00ff;}
+      position: relative;
     }
     h1 {
-          color: white;
-          font-size: 2.5em;
-          text-shadow: 2px 2px 8px #000;
-          text-align: center;
-          margin: 0 0 2em 0;
+      color: white;
+      font-size: 2.5em;
+      text-shadow: 2px 2px 8px #000;
+      text-align: center;
+      margin: 0 0 2em 0;
+      z-index: 1;
     }
     button {
-      font-size: 1.5em;
-      padding: 0.8em 2em;
+      background: transparent;
       border: none;
-      border-radius: 8px;
-      background: #fff;
-      color: #333;
-      font-weight: bold;
       cursor: pointer;
-      box-shadow: 2px 2px 10px #0002;
-      transition: background 0.2s;
+      font-size: 3em;
+      animation: spin 1.5s linear infinite;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1;
     }
-    button:active {
-      background: #eee;
+    @keyframes spin {
+      0%   { transform: rotate(0deg);}
+      100% { transform: rotate(360deg);}
+    }
+    /* Confetti canvas covers the page */
+    #confetti-canvas {
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      pointer-events: none;
+      z-index: 0;
     }
   </style>
 </head>
 <body>
+  <canvas id="confetti-canvas"></canvas>
   <h1>Happy Birthday Kaylin</h1>
-  <button onclick="window.location.href='celebrate.html'">🎉 Click to Celebrate 🎉</button>
+  <button onclick="window.location.href='celebrate.html'">🍺</button>
+  <script>
+    // Basic confetti animation (no libraries)
+    const canvas = document.getElementById('confetti-canvas');
+    const ctx = canvas.getContext('2d');
+    let W = window.innerWidth, H = window.innerHeight;
+    canvas.width = W;
+    canvas.height = H;
+
+    const confettiCount = 120;
+    const confettiColors = ['#fde132', '#009bde', '#ff6b00', '#ff4e91', '#2ecc71', '#e67e22', '#9b59b6'];
+    const confetti = [];
+
+    function randomRange(a, b) {
+      return Math.random() * (b - a) + a;
+    }
+
+    function ConfettiParticle() {
+      this.x = randomRange(0, W);
+      this.y = randomRange(-H, 0);
+      this.r = randomRange(4, 8);
+      this.color = confettiColors[Math.floor(Math.random() * confettiColors.length)];
+      this.d = randomRange(2, 7);
+      this.tilt = randomRange(-10, 0);
+      this.tiltAngleIncremental = randomRange(0.05, 0.12);
+      this.tiltAngle = 0;
+
+      this.draw = function() {
+        ctx.beginPath();
+        ctx.lineWidth = this.r;
+        ctx.strokeStyle = this.color;
+        ctx.moveTo(this.x + this.tilt + this.r / 3, this.y);
+        ctx.lineTo(this.x + this.tilt, this.y + this.tilt + this.r / 5);
+        ctx.stroke();
+      }
+    }
+
+    function setupConfetti() {
+      for (let i = 0; i < confettiCount; i++) {
+        confetti.push(new ConfettiParticle());
+      }
+    }
+
+    function drawConfetti() {
+      ctx.clearRect(0, 0, W, H);
+      for (let i = 0; i < confetti.length; i++) {
+        confetti[i].draw();
+      }
+      updateConfetti();
+    }
+
+    function updateConfetti() {
+      for (let i = 0; i < confetti.length; i++) {
+        let p = confetti[i];
+        p.y += (Math.cos(p.d) + 3 + p.r / 2) / 2;
+        p.x += Math.sin(p.d);
+        p.tiltAngle += p.tiltAngleIncremental;
+        p.tilt = Math.sin(p.tiltAngle) * 15;
+
+        // If out of bounds, respawn at top
+        if (p.y > H) {
+          confetti[i] = new ConfettiParticle();
+          confetti[i].x = randomRange(0, W);
+          confetti[i].y = -10;
+        }
+      }
+    }
+
+    setupConfetti();
+    setInterval(drawConfetti, 20);
+
+    // Adjust canvas on resize
+    window.addEventListener('resize', function() {
+      W = window.innerWidth;
+      H = window.innerHeight;
+      canvas.width = W;
+      canvas.height = H;
+    });
+  </script>
 </body>
 </html>
