@@ -40,5 +40,29 @@
   <h2>HAPPY BIG 21!!!</h2>
   <img src="https://i.pinimg.com/originals/04/2e/87/042e87c1215a6af34245471691ebef7a.gif" alt="Celebration GIF">
   <div class="bottoms-up">BOTTOMS UP</div>
+<script>
+function createBeerEmoji() {
+  const beer = document.createElement('div');
+  beer.textContent = '🍺';
+  beer.style.position = 'fixed';
+  beer.style.left = Math.random() * 100 + 'vw';
+  beer.style.top = '-2em';
+  beer.style.fontSize = (Math.random() * 24 + 24) + 'px';
+  beer.style.pointerEvents = 'none';
+  beer.style.zIndex = 9999;
+  document.body.appendChild(beer);
+
+  let falling = setInterval(() => {
+    beer.style.top = (parseFloat(beer.style.top) + 2) + 'px';
+    if (parseFloat(beer.style.top) > window.innerHeight) {
+      clearInterval(falling);
+      beer.remove();
+    }
+  }, 16);
+}
+
+// Start raining beer emojis
+setInterval(createBeerEmoji, 200);
+</script>
 </body>
 </html>
