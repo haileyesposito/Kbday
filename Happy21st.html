@@ -102,17 +102,22 @@
   const trivia = [
     {
       question: "What's Kaylin's favorite drink?",
-      answers: ["Celcius", "Shaken Espresso", "Beer", "Peach Juice"],
+      answers: ["Celcius", "Zero Sugar DP", "Beer", "Body Armor"],
       correct:2
     },
+    {
+      question: "How many shots is Kaylin having today?",
+      answers: ["0", "1", "21", "∞"],
+      correct: 3
+    }
     {
       question: "Who is Kaylin's favorite person",
       answers: ["His hot gf", "Chris Evans", "Matt Bomer", "RuPaul"],
       correct: 0
     },
     {
-      question: "How many shots is Kaylin having today?",
-      answers: ["0", "1", "21", "∞"],
+      question: "What is Kaylin's best feature",
+      answers: ["Nerdy Glasses", "Sexy Arms", "Curly bangs", "Everything😩"],
       correct: 3
     }
   ];
@@ -150,7 +155,7 @@
         setTimeout(() => {
           document.getElementById('result').innerText = "Yay you are done! 🥳";
           setTimeout(() => {
-              window.location.href = "celebrate.html";
+              window.location.href = "bday.html";
           }, 2000);
         }, 1200);
       }
