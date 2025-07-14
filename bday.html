@@ -34,23 +34,11 @@
       margin-top: 1em;
       text-shadow: 2px 2px 8px #000;
     }
-    <audio id="bday-audio" src="happy-birthday.mp3"></audio>
-
-    <script>
-      window.onload = function() {
-         const audio = document.getElementById('bday-audio');
-         audio.play().catch(() => {
-            const btn = document.createElement('button');
-            btn.innerText = "Play Birthday Song 🎶";
-            btn.onclick = () => audio.play();
-            document.body.appendChild(btn);
-         });
-      };
-    </script>
   </style>
 </head>
 <body>
   <h2>HAPPY BIG 21!!!</h2>
+  <audio id="bday-audio" src="happy-birthday.mp3"></audio>
   <img src="https://i.pinimg.com/originals/04/2e/87/042e87c1215a6af34245471691ebef7a.gif" alt="Celebration GIF">
   <div class="bottoms-up">BOTTOMS UP</div>
 <script>
