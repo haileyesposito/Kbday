@@ -39,6 +39,21 @@
 <body>
   <h2>HAPPY BIG 21!!!</h2>
   <audio id="bday-audio" src="happy-birthday.mp3"></audio>
+  <script>
+    window.onload = function() {
+      const audio = document.getElementById('bday-audio');
+      audio.play().catch() => {
+        const btn = document.createElement ('button');
+        btn.innerText = Play Bday Song!";
+        btn.style.fontSize = "1.5em";
+        btn.onclick = () => {
+          audio.play();
+          btn.remove();
+        };
+        document.body.insertBefore(btn, document.body.firstChild.nextSibling);
+      });
+    };
+  </script>
   <img src="https://i.pinimg.com/originals/04/2e/87/042e87c1215a6af34245471691ebef7a.gif" alt="Celebration GIF">
   <div class="bottoms-up">BOTTOMS UP</div>
 <script>
