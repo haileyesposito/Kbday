@@ -42,9 +42,9 @@
   <script>
     window.onload = function() {
       const audio = document.getElementById('bday-audio');
-      audio.play().catch() => {
+      audio.play().catch(() => {
         const btn = document.createElement ('button');
-        btn.innerText = Play Bday Song!";
+        btn.innerText = "Play Bday Song!";
         btn.style.fontSize = "1.5em";
         btn.onclick = () => {
           audio.play();
